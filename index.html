@@ -6,31 +6,54 @@
     <title>Musikvereine</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
-            margin: 50px;
+            margin: 0;
+            padding: 0;
+            background: url('Partybild_Hintergrund.jpg') no-repeat center center/cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         a {
-            display: block;
-            margin: 20px;
             font-size: 20px;
             text-decoration: none;
             color: white;
-            background-color: #0073e6;
-            padding: 10px;
-            border-radius: 5px;
-            width: 250px;
-            margin: 10px auto;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 30px;
+            width: 280px;
+            transition: all 0.3s ease-in-out;
+            backdrop-filter: blur(5px);
         }
         a:hover {
-            background-color: #005bb5;
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
     <h1>Willkommen!</h1>
     <p>Hier findest du die Links zu den Musikvereinen:</p>
-    <a href="https://www.mv-winterbach.de" target="_blank">Musikverein Winterbach</a>
-    <a href="https://www.mv-weissbuch.de" target="_blank">Musikverein Weißbuch</a>
+    <div class="link-container">
+        <a href="https://www.mv-winterbach.de" target="_blank">Musikverein Winterbach</a>
+        <a href="https://www.mv-weissbuch.de" target="_blank">Musikverein Weißbuch</a>
+    </div>
 </body>
 </html>
