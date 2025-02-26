@@ -143,8 +143,8 @@
       display: none;
       position: fixed;
       top: 0;
-      left: 0;
-      width: 100%;
+      left: 39,5%;
+      width: 300px;
       height: 100%;
 	  background: rgba(0, 0, 0, 0);
       backdrop-filter: blur(8px);
@@ -154,12 +154,21 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 20px;
+      padding: 20px;  
 	  overflow: hidden; /* Verhindert Überlauf */
-	  text-overflow: ellipsis; /* Fügt "..." hinzu, falls nötig */
-	  width: 90%; /* Stellt sicher, dass der Text nicht zu breit wird */
-	  
+  text-overflow: ellipsis; /* Fügt "..." hinzu, falls nötig */
     }
+	
+	.songtext-container {
+    background: rgba(0, 0, 0, 0); /* Transparenter Bereich */
+    padding: 20px;
+    backdrop-filter: blur(8px); /* Kein Blur für den Textbereich */
+    overflow: hidden;
+    text-overflow: ellipsis;
+	max-width: fit-content;
+	
+}
+	
 
     .close-btn {
       margin-top: 20px;
@@ -222,7 +231,7 @@
 
   <div class="songtext-overlay" id="songtextOverlay" style="display: none;">
     <h2>🎶 Songtext 🎶</h2>
-    <p id="songtext">...</p>
+    <p class="songtext-container" id="songtext">...</p>
     <button class="close-btn" onclick="toggleSongtext()">Schließen</button>
   </div>
 
