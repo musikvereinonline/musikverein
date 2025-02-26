@@ -155,7 +155,10 @@
       justify-content: center;
       text-align: center;
       padding: 20px;
-	  font-size: 0.5em; /* Kleinere Schriftgröße */
+	  overflow: hidden; /* Verhindert Überlauf */
+	  text-overflow: ellipsis; /* Fügt "..." hinzu, falls nötig */
+	  width: 90%; /* Stellt sicher, dass der Text nicht zu breit wird */
+	  
     }
 
     .close-btn {
