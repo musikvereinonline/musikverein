@@ -1,97 +1,319 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Musikverein</title>
-    <style>
-        body {
-    		font-family: 'Arial', sans-serif;
-   		text-align: center;
-  		margin: 0;
-  		padding: 0;
-    		background: url('Partybild_Hintergrund.jpg') no-repeat center center/cover;
-    		color: white;
-    		display: flex;
-    		flex-direction: column;
-    		align-items: center;
-    		justify-content: center;
-    		height: 100vh;
-    		overflow: hidden;
-    		animation: moveBackground 10s infinite linear alternate;
-	}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Musikvereine</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: url('Partybild_Hintergrund.jpg') no-repeat center center/cover;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      animation: moveBackground 10s infinite linear alternate;
+    }
+    
+    @keyframes moveBackground {
+      0% { background-position: left center; }
+      100% { background-position: right center; }
+    }
+	
+	
+	.animated-section {
+      opacity: 0;
+      transform: translateY(50px);
+      animation: flyIn 1s ease-out forwards;
+    }
+    
+    @keyframes flyIn {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+	
+	
 
-	@keyframes moveBackground {
-    		0% { background-position: left center; }
-    		100% { background-position: right center; }
-	}
+    .highlighted-text {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      padding: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      display: inline-block;
+    }
+	
+	h1.animated-text {
+      margin-top: -5vh;
+    }
 
+    .links-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+      padding: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      font-size:  1.2em; /* Schriftgröße Links*/
+    }
 
+    .link {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin: 5px 0;
+      transition: background 0.3s;
+      display: inline-block;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
 
-        .animated-text span {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(-50px);
-            animation: letterFlyIn 0.5s ease-out forwards;
-        }
-        @keyframes letterFlyIn {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animated-text span:nth-child(1) { animation-delay: 0.1s; }
-        .animated-text span:nth-child(2) { animation-delay: 0.2s; }
-        .animated-text span:nth-child(3) { animation-delay: 0.3s; }
-        .animated-text span:nth-child(4) { animation-delay: 0.4s; }
-        .animated-text span:nth-child(5) { animation-delay: 0.5s; }
-        .animated-text span:nth-child(6) { animation-delay: 0.6s; }
-        .animated-text span:nth-child(7) { animation-delay: 0.7s; }
-        p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: slideUp 1.5s ease-out 1.5s forwards;
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .link-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            opacity: 0;
-            animation: fadeInLinks 1.5s ease-out 3s forwards;
-        }
-        @keyframes fadeInLinks {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        a {
-            font-size: 20px;
-            text-decoration: none;
-            color: white;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px 30px;
-            border-radius: 30px;
-            width: 280px;
-            transition: all 0.3s ease-in-out;
-            backdrop-filter: blur(5px);
-        }
-        a:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.1);
-        }
-    </style>
+    .link:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .audio-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+      padding: 15px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+	  margin-top: 50px;
+      position: relative;
+      /*position: absolute;*/
+      /*bottom: 20px;*/
+    }
+
+    .progress-bar {
+      width: 300px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 10px 0;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, red, yellow, green, cyan, blue, magenta, red);
+      background-size: 400% 400%;
+	  animation: gradientAnimation 3s infinite linear;
+      /* Standardmäßig läuft die Animation */
+      animation-play-state: running;
+    }
+	
+	@keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .audio-controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .audio-controls button {
+      background: transparent; /* Hintergrund transparent */
+      border: 2px solid rgba(255, 255, 255, 0.5); /* Rahmen bleibt sichtbar */
+      color: white; /* Textfarbe */
+      padding: 10px 15px; /* Polsterung */
+      border-radius: 5px; /* Abgerundete Ecken */
+      cursor: pointer; /* Zeigt an, dass es ein klickbares Element ist */
+      transition: background 0.3s; /* Weiche Übergänge für den Hintergrund */
+    }
+
+    .audio-controls button:hover {
+      background: rgba(255, 255, 255, 0.3); /* Hintergrund beim Hover */
+    }
+
+    .songtext-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+	  background: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(8px);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.3);
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+	
+	.animated-text span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(-50px);
+      animation: letterFlyIn 0.5s ease-out forwards;
+	  font-size:  2.0em;
+    }
+    
+    @keyframes letterFlyIn {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animated-text span:nth-child(n) { 
+      animation-delay: calc(0.1s * var(--i)); 
+    }
+  </style>
 </head>
 <body>
-    <h1 class="animated-text">
-        <span>G</span><span>r</span><span>i</span><span>a</span><span>ß</span><span>&nbsp;</span><span>D</span><span>i</span><span>!</span>
-    </h1>
-    <p>Party, Gaudi, FeschdlesGäng – <br> klick Di nei und sei ein Fän!</p>
-    <div class="link-container">
-        <a href="https://www.mv-weissbuch.de" target="_blank">Musikverein Weissbuch</a>
-        <a href="https://www.mv-winterbach.de" target="_blank">Musikverein Winterbach</a>
+  <h1 class="animated-text animated-section">
+    <span style="--i:1">G</span><span style="--i:2">r</span><span style="--i:3">i</span><span style="--i:4">a</span><span style="--i:5">ß</span><span style="--i:6">&nbsp;</span><span style="--i:7">D</span><span style="--i:8">i</span><span style="--i:9">!</span>
+  </h1>
+  <p class="highlighted-text animated-section">Party, Gaudi, FeschdlesGäng – <br> Klick Di nei und sei ein Fän!</p>
+
+  <div class="links-container animated-section">
+    <a href="https://www.mv-weissbuch.de" class="link">Musikverein Weissbuch</a>
+    <a href="https://www.mv-winterbach.de" class="link">Musikverein Winterbach</a>
+  </div>
+
+  <div class="audio-container animated-section">
+    <div class="highlighted-text">FeschdlesGäng-Song</div>
+    <div class="audio-controls">
+      <button onclick="playSong()">▶</button>
+      <button onclick="pauseSong()">⏸</button>
+      <button onclick="resetSong()">⟳</button>
+      <button onclick="toggleSongtext()">📝</button>
     </div>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <p id="time">0:00 / 0:00</p>
+  </div>
+
+  <audio id="song" src="5!BX2!wlZ!tU.mp3"></audio>
+
+  <div class="songtext-overlay" id="songtextOverlay" style="display: none;">
+    <h2>🎶 Songtext 🎶</h2>
+    <p id="songtext">...</p>
+    <button class="close-btn" onclick="toggleSongtext()">Schließen</button>
+  </div>
+
+  <script>
+   document.addEventListener("contextmenu", (event) => event.preventDefault());
+   document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey && (event.key === "u" || event.key === "U" || event.key === "s" || event.key === "S")) {
+      event.preventDefault();
+    }
+    if (event.key === "F12") {
+      event.preventDefault();
+    }
+	});
+
+   
+    const song = document.getElementById("song");
+    const progress = document.getElementById("progress");
+    const timeDisplay = document.getElementById("time");
+    const songtextOverlay = document.getElementById("songtextOverlay");
+    const songtextElement = document.getElementById("songtext");
+
+    const songLyrics = [
+	{ time: 0, text: "\u266B" },
+	{ time: 6, text: "Wir sind die Feschdles-Gäng aus Winterbach und Weissbuch\nWer hätt’s gedacht\nWir feiern natürlich die ganze Nacht\nDie Stunden fliegen, der Morgen naht, doch kein Ende in Sicht\nAns Heimgehen denken wir noch lange nicht" },
+	{ time: 23, text: "Wie Winterbach und Weissbuch\nW wie Wahnsinn und immer ein bisschen Unsinn\nMusik verbindet uns, denn so feiern wir die unvergesslichsten Stunden\nEin Hoch auf die Freundschaft, ein Hoch auf die Gäng\nWir sind Team Feschdles - BÄM BÄM" },
+	{ time: 41, text: "\u266B" },
+	{ time: 47, text: "Die Nacht erwacht, Musik erklingt\nWir tanzen wild, bis der Boden springt\nUnd die ganze Truppe singt:\nFür Party und Gaudi sind wir immer bereit\nGemeinsam haben wir ne geile Zeit" },
+	{ time: 61, text: "Wie Winterbach und Weissbuch\nW wie Wahnsinn und immer ein bisschen Unsinn\nMusik verbindet uns, denn so feiern wir die unvergesslichsten Stunden\nEin Hoch auf die Freundschaft, ein Hoch auf die Gäng\nWir sind Team Feschdles - BÄM BÄM" },
+	{ time: 80, text: "Wir sind Team Feschdles - BÄM BÄM" },
+	{ time: 86, text: "Die Nacht erwacht, Musik erklingt\nWir tanzen wild, bis der Boden springt\nUnd die ganze Truppe singt:\nFür Party und Gaudi sind wir immer bereit\nGemeinsam haben wir ne geile Zeit" },
+	{ time: 102, text: "Wie Winterbach und Weissbuch\nW wie Wahnsinn und immer ein bisschen Unsinn\nMusik verbindet uns, denn so feiern wir die unvergesslichsten Stunden\nEin Hoch auf die Freundschaft, ein Hoch auf die Gäng\nWir sind Team Feschdles - BÄM BÄM" },
+	{ time: 122, text: "Wir sind Team Feschdles - BÄM BÄM" },
+	{ time: 126, text: "Jedes Treffen ist unvergessen\nZwei Vereine, alte Freundschaft, die schon immer besteht\n Und unsere Gemeinschaft, die niemals vergeht" },
+	{ time: 139, text: "Wie Winterbach und Weissbuch\nW wie Wahnsinn und immer ein bisschen Unsinn\nMusik verbindet uns, denn so feiern wir die unvergesslichsten Stunden\nEin Hoch auf die Freundschaft, ein Hoch auf die Gäng\nWir sind Team Feschdles - BÄM BÄM" },
+	{ time: 159, text: "Wir sind Team Feschdles - BÄM BÄM" },
+	{ time: 163, text: "Ein Hoch auf die Freundschaft, ein Hoch auf die Gäng\nWir sind Team Feschdles - BÄM BÄM" },
+	{ time: 170, text: "- ENDE -" }
+    ];
+
+    function toggleSongtext() {
+      songtextOverlay.style.display = songtextOverlay.style.display === "flex" ? "none" : "flex";
+    }
+
+    function playSong() {
+      song.play();
+	  progress.style.animationPlayState = "running";
+    }
+
+    function pauseSong() {
+      song.pause();
+	  progress.style.animationPlayState = "paused";
+    }
+
+    function resetSong() {
+      song.pause();
+      song.currentTime = 0;
+      progress.style.width = "0%";
+      timeDisplay.textContent = formatTime(0) + " / " + formatTime(song.duration);
+      songtextElement.textContent = "...";
+	  // Bei Reset soll die Animation pausiert bleiben
+      progress.style.animationPlayState = "paused";
+    }
+
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return m + ":" + (s < 10 ? "0" + s : s);
+    }
+
+
+	song.addEventListener("timeupdate", () => {
+	  if (song.duration) {
+		const percent = (song.currentTime / song.duration) * 100;
+		progress.style.width = percent + "%";
+		timeDisplay.textContent = formatTime(song.currentTime) + " / " + formatTime(song.duration);
+		
+		for (let i = songLyrics.length - 1; i >= 0; i--) {
+		  if (song.currentTime >= songLyrics[i].time) {
+			// Zeilenumbrüche durch <br> ersetzen
+			songtextElement.innerHTML = songLyrics[i].text.replace(/\n/g, "<br>");
+			break;
+		  }
+		}
+	  }
+	});
+
+
+    song.addEventListener("loadedmetadata", () => {
+      timeDisplay.textContent = formatTime(0) + " / " + formatTime(song.duration);
+    });
+
+    song.addEventListener("ended", () => {
+      progress.style.width = "100%";
+	  progress.style.animationPlayState = "paused"; // Stoppe die Animation, nachdem der Song endet
+    });
+  </script>
 </body>
 </html>
